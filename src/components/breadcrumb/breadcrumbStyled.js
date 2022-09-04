@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.nav`
     display: flex;
     border: 0.5px solid #000;
     padding: 10px;
@@ -10,7 +10,6 @@ export const Wrapper = styled.div`
 `;
 
 export const Item = styled.span`
-    // display: inline-block;
     display: flex;
     align-items: center;
     cursor: pointer;

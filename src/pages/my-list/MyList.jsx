@@ -29,7 +29,7 @@ export default function MyList() {
   ];
 
   return (
-    <div>
+    <>
       <Breadcrumb links={navs} />
       {movieList.length === 0 ? (
         <NoData>
@@ -56,6 +56,6 @@ export default function MyList() {
           ))}
         </MoviesWrapper>
       )}
-    </div>
+    </>
   );
 }

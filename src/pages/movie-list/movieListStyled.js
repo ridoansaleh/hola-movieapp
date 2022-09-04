@@ -6,11 +6,11 @@ export const MoviesWrapper = styled.section`
   gap: 10px;
 
   @media only screen and (min-width: 768px) {
-    grid-template-columns: 300px 300px;
+    grid-template-columns: auto auto;
     gap: 30px 20px;
   }
 
-  @media only screen and (min-width: 1020px) {
-    grid-template-columns: 300px 300px 300px;
+  @media only screen and (min-width: 940px) {
+    grid-template-columns: auto auto auto;
   }
 `;

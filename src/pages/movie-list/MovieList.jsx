@@ -47,14 +47,12 @@ export default function MovieList() {
   useEffect(() => {
     const onScroll = () => {
       if (
-        window.innerHeight + document.documentElement.scrollTop + 1 >
+        Math.floor(window.innerHeight + document.documentElement.scrollTop) ===
         document.documentElement.offsetHeight
       ) {
         if (hasMoreData) {
           if (pageNumber.current > 1) setIsLoading(true);
-          setTimeout(() => {
-            getMovies(pageNumber.current);
-          }, 2000);
+          setTimeout(getMovies(pageNumber.current), 2000);
         }
       }
     };
@@ -71,7 +69,7 @@ export default function MovieList() {
   ];
 
   return (
-    <div>
+    <>
       <Breadcrumb links={navs} />
       <MoviesWrapper>
         {movieList.map((movie, idx) => (
@@ -95,6 +93,6 @@ export default function MovieList() {
             <MovieCardSkeleton key={movieList.length + idx} />
           ))}
       </MoviesWrapper>
-    </div>
+    </>
   );
 }

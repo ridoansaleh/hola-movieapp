@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const DetailWrapper = styled.div`
+export const DetailWrapper = styled.section`
   margin-top: 40px;
   min-height: 300px;
   display: flex;
