@@ -3,7 +3,7 @@ import axios from "axios";
 const { REACT_APP_IMDB_API_KEY } = process.env;
 
 const instance = axios.create({
-  baseURL: `http://www.omdbapi.com`,
+  baseURL: `https://www.omdbapi.com`,
 });
 
 export const request = {
