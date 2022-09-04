@@ -7,14 +7,13 @@ import Breadcrumb from "../../components/breadcrumb";
 import { MoviesWrapper, NoData } from "./myListStyled";
 import homeIcon from "../../assets/home.png";
 import boxIcon from "../../assets/box.png";
-import { STORAGE, APP_PATH } from "../../constant";
+import { MY_MOVIE_LIST, MOVIE_LIST_PATH, MOVIE_DETAIL_PATH } from "../../constant";
 
-const { MOVIE_LIST_PATH, MOVIE_DETAIL_PATH } = APP_PATH
 
 export default function MyList() {
   const navigate = useNavigate();
 
-  let movieList = localStorage.getItem(STORAGE.MY_MOVIE_LIST);
+  let movieList = localStorage.getItem(MY_MOVIE_LIST);
   movieList = JSON.parse(movieList) || [];
 
   const navs = [

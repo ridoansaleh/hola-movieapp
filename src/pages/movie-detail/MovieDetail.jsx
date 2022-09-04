@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import {
   DetailWrapper,
   MovieImg,
-  MovieDetail as MovideDescription,
+  MovieDetail as MovieDescription,
   Genre,
   Bold,
   Item,
@@ -21,15 +21,15 @@ import {
   ButtonSkeleton,
 } from "./movieDetailStyled";
 import Breadcrumb from "../../components/breadcrumb";
-import { request } from "../../axios";
+import request from "../../request";
 import ratingIcon from "../../assets/star.png";
 import saveIcon from "../../assets/save.png";
 import deleteIcon from "../../assets/delete.png";
 import homeIcon from "../../assets/home.png";
-import { STORAGE } from "../../constant";
+import { MY_MOVIE_LIST, MOVIE_LIST_PATH } from "../../constant";
 
 const getMovieList = () => {
-  let list = localStorage.getItem(STORAGE.MY_MOVIE_LIST);
+  let list = localStorage.getItem(MY_MOVIE_LIST);
   return JSON.parse(list) || [];
 };
 
@@ -37,6 +37,7 @@ export default function MovieDetail() {
   const [isLoading, setIsLoading] = useState(true);
   const [movie, setMovie] = useState(true);
   const [isSaved, setIsSaved] = useState(false);
+  const skeletonGenres = Array.from({ length: 3 })
   const params = useParams();
   const navigate = useNavigate();
 
@@ -66,14 +67,14 @@ export default function MovieDetail() {
 
   const handleDeleteMovie = (movieId) => {
     const updatedList = myMovieList.filter((movie) => movie.imdbID !== movieId);
-    localStorage.setItem(STORAGE.MY_MOVIE_LIST, JSON.stringify(updatedList));
+    localStorage.setItem(MY_MOVIE_LIST, JSON.stringify(updatedList));
     setIsSaved(false);
     alert(`DELETED: "${movie.Title}" has been deleted from your list`);
   };
 
   const handleAddMovie = (movie) => {
     const updatedList = [...myMovieList, movie];
-    localStorage.setItem(STORAGE.MY_MOVIE_LIST, JSON.stringify(updatedList));
+    localStorage.setItem(MY_MOVIE_LIST, JSON.stringify(updatedList));
     setIsSaved(true);
     alert(`SAVED: "${movie.Title}" has been added to your list`);
   };
@@ -82,7 +83,7 @@ export default function MovieDetail() {
     {
       name: "Home",
       icon: homeIcon,
-      onClick: () => navigate("/"),
+      onClick: () => navigate(MOVIE_LIST_PATH),
     },
     {
       name: "Movie Detail",
@@ -95,10 +96,10 @@ export default function MovieDetail() {
       {isLoading ? (
         <DetailWrapper>
           <MovieImgSkeleton />
-          <MovideDescription>
+          <MovieDescription>
             <MovieTitleSkeleton />
             <GenreWrapper>
-              {Array.from({ length: 3 }).map((_, idx) => (
+              {skeletonGenres.map((_, idx) => (
                 <GenreSkeleton key={idx} />
               ))}
             </GenreWrapper>
@@ -122,12 +123,12 @@ export default function MovieDetail() {
             <Actions>
               <ButtonSkeleton />
             </Actions>
-          </MovideDescription>
+          </MovieDescription>
         </DetailWrapper>
       ) : (
         <DetailWrapper>
           <MovieImg src={movie.Poster} alt={movie.Title} />
-          <MovideDescription>
+          <MovieDescription>
             <h1>{movie.Title}</h1>
             <div>
               {movie.Genre.split(", ").map((genre, idx) => (
@@ -168,7 +169,7 @@ export default function MovieDetail() {
                 </Button>
               )}
             </Actions>
-          </MovideDescription>
+          </MovieDescription>
         </DetailWrapper>
       )}
     </>

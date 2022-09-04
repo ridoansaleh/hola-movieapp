@@ -1,16 +1,18 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
+import React from "react";
+import { createRoot } from "react-dom/client";
 import { HashRouter } from "react-router-dom";
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import './index.css';
+import { Global } from "@emotion/react";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { appStyles } from "./appStyled";
 
-const container = document.getElementById('root');
+const container = document.getElementById("root");
 const root = createRoot(container);
 
 root.render(
   <React.StrictMode>
     <HashRouter>
+      <Global styles={appStyles} />
       <App />
     </HashRouter>
   </React.StrictMode>

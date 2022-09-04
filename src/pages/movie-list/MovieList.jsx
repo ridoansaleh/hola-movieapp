@@ -7,10 +7,8 @@ import MovieCardSkeleton from "../../components/movie-card-skeleton";
 import Breadcrumb from "../../components/breadcrumb";
 import { MoviesWrapper } from "./movieListStyled";
 import bookmarkIcon from "../../assets/bookmark.png";
-import { request } from "../../axios";
-import { APP_PATH } from '../../constant'
-
-const { MY_LIST_PATH, MOVIE_DETAIL_PATH } = APP_PATH
+import request from "../../request";
+import { MY_LIST_PATH, MOVIE_DETAIL_PATH } from '../../constant'
 
 export default function MovieList() {
   const [movieList, setMovieList] = useState([]);
@@ -19,7 +17,6 @@ export default function MovieList() {
   const pageNumber = useRef(1);
   const hasMoreData = useRef(true);
   const skeletonCards = Array.from({ length: 5 });
-
   const navigate = useNavigate();
 
   const getMovies = (currentPage) => {
